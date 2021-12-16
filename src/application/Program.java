@@ -24,12 +24,14 @@ public class Program {
         int[] matriz  = new int[16];
 
         fillMatriz(matriz,message);
-        //printMatriz(matriz);
+        printMatriz(matriz);
 
-        //System.out.printf("----------------\n");
+        System.out.printf("----------------\n");
 
         configMatriz(matriz);
         printMatriz(matriz);
+
+        //System.out.println(comparator(matriz, 1));
 
 
     }
@@ -58,10 +60,13 @@ public class Program {
         int sum = 0;
 
         for(int i=0; i<16; i++){
-            int z = Integer.parseInt(Character.toString(toBinary(i).charAt(comp)));
+            int z = Integer.parseInt(Character.toString(String.format("%4s", Integer.toBinaryString(i)).replace(" ", "0").charAt(comp)));
+
             // pega o digito da posicao comp do binário da posicao do vetor e converte em inteiro
-            if(z == 1){
-                if(matriz[i] == 1) sum++;
+            if(z == 1) {
+                if (matriz[i] == 1) {
+                    sum++;
+                }
             }
         }
 
@@ -77,12 +82,27 @@ public class Program {
     public static void configMatriz(int[] matriz){
         int aux = 3;
 
-        for(int n=0; n>4;n++){
-            if(comparator(matriz, aux) == false){
+        for(int n=0; n<4;n++){
+            if(!comparator(matriz, aux)){
                 matriz[(int)Math.pow(2, n)] = 1;
             }
+
             aux--;
         }
+
+        int sum = 0;
+        for(int n=0; n<15; n++){
+            if (matriz[n] == 1) {
+                sum++;
+            }
+        }
+
+        if(sum % 2 == 0){
+            matriz[0] = 1;
+        } else {
+            matriz[0] = 0;
+        }
+
     }
 
     public static void printMatriz(int[] matriz){
