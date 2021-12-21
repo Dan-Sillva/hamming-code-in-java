@@ -1,6 +1,7 @@
 package application;
 
 import java.math.*;
+import java.util.Random;
 
 /*
 * algoritmo de auto-correção, corrige uma matriz binária de 4x4 a partir de comparação
@@ -23,15 +24,23 @@ public class Program {
         String message = "11010010101";
         int[] matriz  = new int[16];
 
+        System.out.printf("----------------original:\n");
+
         fillMatriz(matriz,message);
         printMatriz(matriz);
 
-        System.out.printf("----------------\n");
+        System.out.printf("----------------config:\n");
 
         configMatriz(matriz);
         printMatriz(matriz);
 
-        //System.out.println(comparator(matriz, 1));
+        System.out.printf("----------------corrupt:\n");
+
+        crptData(matriz);
+        printMatriz(matriz);
+
+
+        //System.out.println(random);
 
 
     }
@@ -79,6 +88,22 @@ public class Program {
         return dec;
     };
 
+    public static boolean comparator(int[] matriz){
+        int sum = 0;
+
+        for(int i=0; i<15;i++){
+            if(matriz[i] == 1){
+                sum++;
+            }
+        }
+
+        if(sum % 2 == 0){
+            return true;
+        } else {
+            return false;
+        }
+    };
+
     public static void configMatriz(int[] matriz){
         int aux = 3;
 
@@ -121,6 +146,44 @@ public class Program {
         System.out.println();
 
     };
+
+    public static void crptData(int[] matriz){   //corrupt data
+        int random = new Random().nextInt(15);
+        if(matriz[random] == 1){
+            matriz[random] = 0;
+        }else{
+            matriz[random] = 1;
+        }
+    }
+
+    public static void selfCorrection(int[] matriz){
+        if(comparator(matriz)){     // par
+            printMessage(matriz);
+        } else {                    // impar
+            int aux = 3;
+            int[] dec = new int[4];
+
+            int x = 
+
+            for(int n=0; n<4;n++){
+                if(!comparator(matriz, aux)){
+                    dec[aux] = 1;
+                } else {dec[aux] = 0;}
+
+                aux--;
+            }
+
+            if(matriz[dec]){
+
+            }else {
+
+            }
+
+        }
+    }
+
+    public static void printMessage(int[] matriz){};
+
 }
 
 
