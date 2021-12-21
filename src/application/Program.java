@@ -39,8 +39,16 @@ public class Program {
         crptData(matriz);
         printMatriz(matriz);
 
+        printMessage(matriz);
+        System.out.printf("\n--Enviada : "+ message);
 
-        //System.out.println(random);
+        System.out.printf("\n\n----------------correction:\n");
+
+        selfCorrection(matriz);
+        printMatriz(matriz);
+
+        printMessage(matriz);
+        System.out.printf("\n--Enviada : "+ message);
 
 
     }
@@ -157,32 +165,44 @@ public class Program {
     }
 
     public static void selfCorrection(int[] matriz){
-        if(comparator(matriz)){     // par
-            printMessage(matriz);
+        if(!comparator(matriz)){     // par
+
         } else {                    // impar
             int aux = 3;
-            int[] dec = new int[4];
+            String dec = "";
 
-            int x = 
+            String x;
 
             for(int n=0; n<4;n++){
                 if(!comparator(matriz, aux)){
-                    dec[aux] = 1;
-                } else {dec[aux] = 0;}
+                    dec = String.format(dec  +"1");
+                } else {dec = String.format(dec  +"0");}
 
                 aux--;
             }
 
-            if(matriz[dec]){
+            dec = new StringBuilder(dec).reverse().toString();
+            int n = Integer.parseInt(dec, 2);
 
+            //System.out.println(dec+"--------------->>>>>>-");
+
+            if(matriz[n] == 1){
+                matriz[n] = 0;
             }else {
-
+                matriz[n] = 1;
             }
-
         }
     }
 
-    public static void printMessage(int[] matriz){};
+    public static void printMessage(int[] matriz){
+
+
+        System.out.printf("\n-Recebida : ");
+        for(int n=0; n<matriz.length;n++) {
+            if(Math.log(n) / Math.log(2) != (int)(Math.log(n) / Math.log(2)) && n !=0 )
+                System.out.print(matriz[n]);
+        };
+    };
 
 }
 
